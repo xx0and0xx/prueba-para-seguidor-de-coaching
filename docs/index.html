@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#1e1f35">
+  <title>Avance en Coaching Ejecutivo</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AF%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="fondo" aria-hidden="true"></div>
+
+  <!-- Aviso cuando falta configurar la URL de la API -->
+  <section id="sin-config" class="login" hidden>
+    <div class="caja">
+      <div class="logo"><div class="ico">🛠️</div><h1>Falta configurar la app</h1></div>
+      <p>No se encontró <b>docs/config.js</b> o no define <code>API_URL</code>.</p>
+      <p class="sub">Copia <code>docs/config.example.js</code> como <code>docs/config.js</code>, pega la URL de tu aplicación web de Apps Script y vuelve a publicar. Los pasos están en el README.</p>
+    </div>
+  </section>
+
+  <!-- Ingreso -->
+  <section id="login" class="login" hidden>
+    <form class="caja" id="form-login" autocomplete="on">
+      <div class="logo">
+        <div class="ico">🎯</div>
+        <h1 id="login-programa">Avance en Coaching Ejecutivo</h1>
+        <div class="sub" id="login-org">Training Skills</div>
+      </div>
+      <div id="login-error" class="aviso error" hidden role="alert"></div>
+      <label class="campo"><span>Correo</span>
+        <input type="email" id="login-correo" name="username" autocomplete="username" inputmode="email" required>
+      </label>
+      <label class="campo"><span>Contraseña</span>
+        <div class="con-boton">
+          <input type="password" id="login-clave" name="password" autocomplete="current-password" required>
+          <button type="button" class="btn sec" id="login-ver" aria-label="Mostrar contraseña">👁</button>
+        </div>
+      </label>
+      <button type="submit" class="btn" id="login-enviar">Ingresar</button>
+    </form>
+  </section>
+
+  <!-- Aplicación -->
+  <div id="app" hidden>
+    <div class="topbar">
+      <button type="button" id="btn-menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <span class="t" id="topbar-titulo">Avance en Coaching Ejecutivo</span>
+    </div>
+    <div class="sombra-menu" id="sombra-menu"></div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Menú principal">
+      <div class="marca">
+        <span class="ico">🎯</span>
+        <span class="txt">
+          <span class="prog" id="marca-programa">Avance en Coaching Ejecutivo</span>
+          <span class="org" id="marca-org">Training Skills</span>
+        </span>
+      </div>
+      <nav class="nav" id="nav"></nav>
+      <div class="usuario">
+        <div class="nombre"><span>👤</span><b id="usuario-nombre"></b></div>
+        <div class="acciones">
+          <button type="button" id="btn-clave">🔑 Clave</button>
+          <button type="button" id="btn-salir">Salir</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="contenido" id="contenido">
+      <section class="vista" id="v-tablero" hidden></section>
+      <section class="vista" id="v-coachees" hidden></section>
+      <section class="vista" id="v-avance" hidden></section>
+      <section class="vista" id="v-fundamentacion" hidden></section>
+      <section class="vista" id="v-configuracion" hidden></section>
+      <section class="vista" id="v-medicion" hidden></section>
+    </main>
+  </div>
+
+  <div id="toasts" aria-live="polite"></div>
+  <div id="modal-raiz"></div>
+
+  <script src="config.js" onerror="window.__sinConfig=true"></script>
+  <script src="js/calculos.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/vistas/tablero.js"></script>
+  <script src="js/vistas/coachees.js"></script>
+  <script src="js/vistas/avance.js"></script>
+  <script src="js/vistas/fundamentacion.js"></script>
+  <script src="js/vistas/configuracion.js"></script>
+  <script src="js/vistas/medicion.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

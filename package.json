@@ -1,0 +1,20 @@
+{
+  "name": "avance-coaching-ejecutivo",
+  "version": "1.0.0",
+  "description": "Avance en Coaching Ejecutivo (Training Skills): SPA en GitHub Pages + Google Apps Script + Google Sheets.",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "sync": "node scripts/sync-calculos.js",
+    "test": "node tests/calculos.test.js",
+    "test:backend": "node tests/backend.mock.test.js",
+    "test:frontend": "node tests/frontend.smoke.test.js",
+    "test:all": "npm test && npm run test:backend && npm run test:frontend"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "jsdom": "^31.0.1"
+  }
+}

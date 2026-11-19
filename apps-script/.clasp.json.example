@@ -1,0 +1,13 @@
+{
+  "scriptId": "PEGA_AQUI_EL_ID_DEL_PROYECTO_DE_APPS_SCRIPT",
+  "rootDir": ".",
+  "filePushOrder": [
+    "Calculos.gs",
+    "Config.gs",
+    "Main.gs",
+    "Auth.gs",
+    "Datos.gs",
+    "Informe.gs",
+    "Setup.gs"
+  ]
+}

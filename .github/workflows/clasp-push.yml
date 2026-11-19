@@ -1,0 +1,48 @@
+name: Apps Script (clasp push)
+
+# Opcional y DESACTIVADO por defecto.
+# Para activarlo:
+#   1) Secretos del repositorio: CLASPRC_JSON (contenido de ~/.clasprc.json) y SCRIPT_ID.
+#   2) Variable del repositorio: CLASP_ENABLED = true
+# Después de subir el código hay que actualizar la implementación de la aplicación web
+# (Implementar ▸ Administrar implementaciones ▸ Nueva versión) para publicar los cambios.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'apps-script/**'
+      - 'docs/js/calculos.js'
+
+permissions:
+  contents: read
+
+jobs:
+  clasp-push:
+    if: ${{ vars.CLASP_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Pruebas de cálculos
+        run: npm test
+
+      - name: Instalar clasp
+        run: npm install -g @google/clasp
+
+      - name: Credenciales de clasp
+        env:
+          CLASPRC_JSON: ${{ secrets.CLASPRC_JSON }}
+          SCRIPT_ID: ${{ secrets.SCRIPT_ID }}
+        run: |
+          printf '%s' "$CLASPRC_JSON" > ~/.clasprc.json
+          printf '{"scriptId":"%s","rootDir":"."}' "$SCRIPT_ID" > apps-script/.clasp.json
+
+      - name: Subir el código
+        working-directory: apps-script
+        run: clasp push --force

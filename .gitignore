@@ -1,0 +1,21 @@
+# Credenciales y configuración local de clasp (nunca se suben)
+.clasp.json
+.clasprc.json
+apps-script/.clasp.json
+
+# Variables de entorno y secretos
+.env
+.env.*
+*.pem
+*.key
+
+# Dependencias y artefactos
+node_modules/
+npm-debug.log*
+.DS_Store
+Thumbs.db
+*.log
+
+# Nota: docs/config.js NO está ignorado a propósito: GitHub Pages necesita servirlo.
+# Solo contiene la URL pública de la API (no es una credencial). Si prefieres no
+# publicarla, genera ese archivo en un workflow de despliegue.
