@@ -64,6 +64,8 @@ var Api = (function () {
     }, function (e) {
       if (timer) clearTimeout(timer);
       if (e && e.name === 'AbortError') throw new Error('La solicitud tardó demasiado. Intenta de nuevo.');
+      if (window.console && console.error) console.error('[API] ' + accion + ':', e);
+      if (e && e.name === 'SyntaxError') throw new Error('El servidor respondió algo inesperado (no es JSON). Revisa que la implementación del Apps Script permita acceso a «Cualquier usuario» y que esté actualizada.');
       throw new Error('No se pudo conectar con el servidor. Revisa tu conexión e intenta de nuevo.');
     });
   }
