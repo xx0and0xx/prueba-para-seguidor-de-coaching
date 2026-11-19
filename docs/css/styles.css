@@ -211,6 +211,8 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 14px; }
 .login .logo .ico { font-size: 44px; }
 .login .logo h1 { font-size: 22px; margin: 6px 0 2px; }
 .login .btn { width: 100%; }
+.login .con-boton .btn { width: auto; flex: none; padding-left: 14px; padding-right: 14px; }
+.con-boton > input { min-width: 0; }
 
 /* ---------- Momentos / fechas ---------- */
 .momento { border: 1px solid var(--border); border-radius: 12px; padding: 12px; background: #fff; }
