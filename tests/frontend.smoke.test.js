@@ -21,7 +21,7 @@ vc.on('jsdomError', e => errores.push('jsdomError: ' + (e.detail && e.detail.sta
 vc.on('error', (...a) => errores.push('console.error: ' + a.join(' ')));
 
 const html = fs.readFileSync(path.join(DOCS, 'index.html'), 'utf8').replace(/<script src="([^"]+)"[^>]*><\/script>/g, (m, src) => {
-  const f = src === 'config.js' ? null : path.join(DOCS, src);
+  const f = src.split('?')[0] === 'config.js' ? null : path.join(DOCS, src.split('?')[0]);
   const code = f ? fs.readFileSync(f, 'utf8') : "const API_URL='https://script.google.com/macros/s/TEST/exec';";
   return '<script>' + code.replace(/<\/script/g, '<\\/script') + '</script>';
 });
