@@ -71,7 +71,7 @@ Vistas.coachees = (function () {
         '<b>' + esc(c.nombre) + '</b>' +
         '<span class="sub">' + esc(c.cargo || 'Sin cargo') + (c.coachNombre ? ' · Coach: ' + esc(c.coachNombre) : ' · Sin coach') + '</span> ' +
         U.chipEstadoCoachee(c.estado) + '</div>' +
-        '<div class="acciones-fila">' +
+        '<div class="acciones-fila acciones-bloque">' +
         '<button type="button" class="btn sec peq" data-editar="' + esc(c.id) + '">✏️ Editar</button>' +
         (c.estado !== 'Cerrado' ? '<button type="button" class="btn sec peq" data-cerrar="' + esc(c.id) + '">🔒 Cerrar</button>' : '') +
         '<button type="button" class="btn peligro peq" data-eliminar="' + esc(c.id) + '">🗑 Eliminar</button>' +

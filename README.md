@@ -172,6 +172,7 @@ npm install       # (una vez) instala jsdom para la prueba del frontend
 npm run test:backend   # API completa contra un simulador de Google Sheets/Drive/Mail
 npm run test:frontend  # pantallas en jsdom conectadas al backend simulado
 npm run test:all
+node tests/dev-server.js   # interfaz de prueba en http://localhost:8765 con datos de ejemplo (ana@x.com / secreto123), sin Google
 npm run sync      # regenera apps-script/Calculos.gs desde docs/js/calculos.js
 ```
 

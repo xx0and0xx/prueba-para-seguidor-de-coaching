@@ -84,7 +84,7 @@ Vistas.avance = (function () {
       '<button type="button" class="btn" id="tx-guardar">Guardar textos</button></div>' +
 
       '<div class="tarjeta"><h2>📄 Informe final</h2>' +
-      '<div class="acciones-fila">' +
+      '<div class="acciones-fila acciones-bloque">' +
       '<button type="button" class="btn sec" id="inf-vista">👁 Vista previa</button>' +
       '<button type="button" class="btn" id="inf-generar">📄 Generar y guardar PDF</button>' +
       '<button type="button" class="btn claro" id="inf-enviar">✉️ Enviar por correo</button></div>' +
@@ -118,35 +118,35 @@ Vistas.avance = (function () {
       stat(esc(k.mayorOportunidad || '—'), 'Mayor oportunidad') +
       '</div>';
 
-    html += '<div class="tarjeta"><h2>🧩 Resultados por habilidad</h2><div class="tabla-scroll"><table class="tabla"><thead><tr>' +
+    html += '<div class="tarjeta"><h2>🧩 Resultados por habilidad</h2><div class="tabla-scroll"><table class="tabla tabla-cards"><thead><tr>' +
       '<th class="izq">Habilidad</th><th>LB</th><th>M1</th><th>M2</th><th>MF</th><th>Meta</th><th>Actual</th><th>Var.</th><th>Índice</th><th style="min-width:130px">% avance</th><th>Estado</th><th>Nivel</th></tr></thead><tbody>' +
       a.habilidades.map(function (h) { return filaHabilidad(h.habilidad, h, false); }).join('') +
       filaHabilidad('Global', a.global, true) + '</tbody></table></div></div>';
 
     html += '<div class="tarjeta"><h2>📋 Detalle por indicador</h2>' +
-      '<p class="sub">La meta de cada indicador se puede editar (1 a 5).</p><div class="tabla-scroll"><table class="tabla"><thead><tr>' +
+      '<p class="sub">La meta de cada indicador se puede editar (1 a 5).</p><div class="tabla-scroll"><table class="tabla tabla-cards"><thead><tr>' +
       '<th>Cód.</th><th class="izq">Indicador</th><th>LB</th><th>M1</th><th>M2</th><th>MF</th><th>Meta</th><th>Actual</th><th>Var.</th><th>Avance</th><th>Estado</th></tr></thead><tbody>' +
       S.filas.map(function (f, i) {
         var ind = a.indicadores[i];
-        return '<tr><td><b>' + esc(f.codigo) + '</b></td><td class="izq" style="min-width:220px">' + esc(f.indicador) + '</td>' +
-          '<td>' + U.chipPuntaje(f.lb) + '</td><td>' + U.chipPuntaje(f.m1) + '</td><td>' + U.chipPuntaje(f.m2) + '</td><td>' + U.chipPuntaje(f.mf) + '</td>' +
-          '<td><select data-meta="' + esc(f.codigo) + '" aria-label="Meta de ' + esc(f.codigo) + '">' +
+        return '<tr><td class="cod" data-et="Código"><b>' + esc(f.codigo) + '</b></td><td class="izq desc" style="min-width:220px">' + esc(f.indicador) + '</td>' +
+          '<td data-et="LB">' + U.chipPuntaje(f.lb) + '</td><td data-et="M1">' + U.chipPuntaje(f.m1) + '</td><td data-et="M2">' + U.chipPuntaje(f.m2) + '</td><td data-et="MF">' + U.chipPuntaje(f.mf) + '</td>' +
+          '<td data-et="Meta"><select data-meta="' + esc(f.codigo) + '" aria-label="Meta de ' + esc(f.codigo) + '">' +
           [1, 2, 3, 4, 5].map(function (n) { return '<option' + (Number(f.meta) === n ? ' selected' : '') + '>' + n + '</option>'; }).join('') +
           '</select></td>' +
-          '<td><b>' + esc(Calculos.fmt(ind.actual, 0)) + '</b></td><td>' + esc(Calculos.fmtVar(ind.variacion)) + '</td>' +
-          '<td>' + esc(Calculos.fmtPct(ind.avance)) + '</td><td>' + U.chipEstado(ind.estado) + '</td></tr>';
+          '<td data-et="Actual"><b>' + esc(Calculos.fmt(ind.actual, 0)) + '</b></td><td data-et="Variación">' + esc(Calculos.fmtVar(ind.variacion)) + '</td>' +
+          '<td data-et="Avance">' + esc(Calculos.fmtPct(ind.avance)) + '</td><td data-et="Estado">' + U.chipEstado(ind.estado) + '</td></tr>';
       }).join('') + '</tbody></table></div></div>';
 
     $('#av-analisis', el).innerHTML = html;
   }
 
   function filaHabilidad(nombre, h, total) {
-    return '<tr' + (total ? ' class="total"' : '') + '><td class="izq"><b>' + esc(nombre) + '</b></td>' +
-      '<td>' + esc(Calculos.fmt(h.lb)) + '</td><td>' + esc(Calculos.fmt(h.m1)) + '</td><td>' + esc(Calculos.fmt(h.m2)) + '</td><td>' + esc(Calculos.fmt(h.mf)) + '</td>' +
-      '<td>' + esc(Calculos.fmt(h.meta)) + '</td><td><b>' + esc(Calculos.fmt(h.actual)) + '</b></td><td>' + esc(Calculos.fmtVar(h.variacion)) + '</td>' +
-      '<td>' + esc(Calculos.fmtPct(h.indice)) + '</td>' +
-      '<td><div style="display:flex;align-items:center;gap:8px"><div style="flex:1">' + U.barra(h.avance) + '</div><span>' + esc(Calculos.fmtPct(h.avance)) + '</span></div></td>' +
-      '<td>' + U.chipEstado(h.estado) + '</td><td>' + U.chipNivel(h.nivel, h.nivelValor) + '</td></tr>';
+    return '<tr' + (total ? ' class="total"' : '') + '><td class="izq desc"><b>' + esc(nombre) + '</b></td>' +
+      '<td data-et="LB">' + esc(Calculos.fmt(h.lb)) + '</td><td data-et="M1">' + esc(Calculos.fmt(h.m1)) + '</td><td data-et="M2">' + esc(Calculos.fmt(h.m2)) + '</td><td data-et="MF">' + esc(Calculos.fmt(h.mf)) + '</td>' +
+      '<td data-et="Meta">' + esc(Calculos.fmt(h.meta)) + '</td><td data-et="Actual"><b>' + esc(Calculos.fmt(h.actual)) + '</b></td><td data-et="Variación">' + esc(Calculos.fmtVar(h.variacion)) + '</td>' +
+      '<td data-et="Índice">' + esc(Calculos.fmtPct(h.indice)) + '</td>' +
+      '<td class="ancho" data-et="% avance"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1">' + U.barra(h.avance) + '</div><span>' + esc(Calculos.fmtPct(h.avance)) + '</span></div></td>' +
+      '<td data-et="Estado">' + U.chipEstado(h.estado) + '</td><td data-et="Nivel">' + U.chipNivel(h.nivel, h.nivelValor) + '</td></tr>';
   }
 
   /* ---------- eventos ---------- */

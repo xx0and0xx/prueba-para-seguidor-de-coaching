@@ -318,6 +318,44 @@ table.tabla { width: 100%; border-collapse: collapse; font-size: 14px; }
   .modal .pie-modal .btn { flex: 1; }
   .pie-fijo .btn { padding: 10px 14px; }
   .tabla { font-size: 13px; }
+
+  /* Listas: nombre a todo el ancho y botones en una fila debajo */
+  .lista .fila { flex-direction: column; align-items: stretch; gap: 10px; }
+  .lista .fila .info { flex: none; width: 100%; }
+  .acciones-bloque { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; width: 100%; }
+  .acciones-bloque .btn { width: 100%; padding-left: 8px; padding-right: 8px; white-space: nowrap; }
+  #inf-vista, #inf-generar, #inf-enviar { white-space: normal; }
+  .tarjeta .acciones-bloque:has(#inf-vista) { grid-auto-flow: row; }
+  .tarjeta > .btn, #tx-guardar { width: 100%; }
+  .encabezado-vista { flex-direction: column; align-items: stretch; }
+  .encabezado-vista .btn, .encabezado-vista select { width: 100% !important; max-width: none !important; }
+
+  /* Mediciones: botones a todo el ancho de su tarjeta */
+  .momento .btn { width: 100%; }
+  .stat, .indicador-clave { text-align: center; }
+  .stat .num, .indicador-clave .valor { justify-content: center; }
+
+  /* Tablas como tarjetas (sin desplazamiento horizontal) */
+  .tabla-cards, .tabla-cards tbody { display: block; width: 100%; }
+  .tabla-cards thead { display: none; }
+  .tabla-cards tr {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px 4px; align-items: start;
+    border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; background: #fff;
+  }
+  .tabla-cards tr.total { background: var(--blue-pale); border-color: var(--blue-mid); }
+  .tabla-cards td { display: block; border: 0; padding: 0; text-align: center; background: none !important; min-width: 0 !important; }
+  .tabla-cards td[data-et]::before {
+    content: attr(data-et); display: block; font-size: 10.5px; font-weight: 700; color: var(--gray);
+    text-transform: uppercase; letter-spacing: .03em; margin-bottom: 3px;
+  }
+  .tabla-cards td.desc { grid-column: 1 / -1; text-align: left; font-size: 14px; line-height: 1.35; }
+  .tabla-cards td.cod { grid-column: 1 / -1; text-align: left; color: var(--blue-mid); }
+  .tabla-cards td.cod b { font-size: 15px; }
+  .tabla-cards td.ancho { grid-column: 1 / -1; text-align: left; }
+  .tabla-cards td[data-et="Estado"], .tabla-cards td[data-et="Nivel"] { grid-column: span 2; }
+  .tabla-cards td[data-et="Estado"]::before, .tabla-cards td[data-et="Nivel"]::before { margin-bottom: 4px; }
+  .tabla-cards td.cod { grid-column: 1 / -1; }
+  .tabla input[type=number], .tabla select { width: 100%; max-width: 84px; }
 }
 
 @media print {
